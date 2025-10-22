@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubbly - バブルチャート情報整理ツール</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🫧 Bubbly</h1>
+            <p class="subtitle">バブルチャートで情報を整理</p>
+        </header>
+
+        <div class="toolbar">
+            <button id="addBubbleBtn" class="btn btn-primary">+ 新規バブル作成</button>
+            <button id="saveBtn" class="btn btn-secondary">💾 保存</button>
+            <button id="exportBtn" class="btn btn-secondary">📤 エクスポート</button>
+            <button id="importBtn" class="btn btn-secondary">📥 インポート</button>
+            <input type="file" id="importFile" accept=".json" style="display: none;">
+
+            <div class="filter-section">
+                <label>フィルター:</label>
+                <select id="categoryFilter">
+                    <option value="all">すべて</option>
+                    <option value="学習">学習</option>
+                    <option value="投資">投資</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div>
+
+            <div class="theme-toggle">
+                <button id="themeToggle" class="btn btn-secondary">🌙 ダークモード</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="chart-container">
+                <svg id="bubbleChart"></svg>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h3>使い方</h3>
+            <ul>
+                <li>「新規バブル作成」で新しいバブルを追加</li>
+                <li>バブルをクリックして詳細を表示</li>
+                <li>バブルをドラッグして移動</li>
+                <li>ダブルクリックで編集</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- モーダル: バブル作成/編集 -->
+    <div id="bubbleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">新規バブル作成</h2>
+            <form id="bubbleForm">
+                <div class="form-group">
+                    <label for="bubbleTitle">タイトル *</label>
+                    <input type="text" id="bubbleTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="bubbleCategory">カテゴリー *</label>
+                    <select id="bubbleCategory" required>
+                        <option value="学習">学習</option>
+                        <option value="投資">投資</option>
+                        <option value="その他">その他</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="bubbleSize">サイズ (1-100) *</label>
+                    <input type="range" id="bubbleSize" min="1" max="100" value="30">
+                    <span id="sizeValue">30</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="bubbleColor">色 *</label>
+                    <div class="color-picker">
+                        <input type="color" id="bubbleColor" value="#3498db">
+                        <div class="color-presets">
+                            <button type="button" class="color-preset" data-color="#e74c3c" style="background: #e74c3c"></button>
+                            <button type="button" class="color-preset" data-color="#f39c12" style="background: #f39c12"></button>
+                            <button type="button" class="color-preset" data-color="#2ecc71" style="background: #2ecc71"></button>
+                            <button type="button" class="color-preset" data-color="#3498db" style="background: #3498db"></button>
+                            <button type="button" class="color-preset" data-color="#9b59b6" style="background: #9b59b6"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bubbleDescription">説明</label>
+                    <textarea id="bubbleDescription" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">作成</button>
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">キャンセル</button>
+                    <button type="button" id="deleteBtn" class="btn btn-danger" style="display: none;">削除</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- モーダル: バブル詳細 -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="detailTitle"></h2>
+            <div class="detail-content">
+                <p><strong>カテゴリー:</strong> <span id="detailCategory"></span></p>
+                <p><strong>サイズ:</strong> <span id="detailSize"></span></p>
+                <p><strong>色:</strong> <span id="detailColor"></span></p>
+                <p><strong>説明:</strong></p>
+                <p id="detailDescription"></p>
+            </div>
+            <div class="form-actions">
+                <button id="editBubbleBtn" class="btn btn-primary">編集</button>
+                <button class="btn btn-secondary close-detail">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/bubbleChart.js"></script>
+</body>
+</html>

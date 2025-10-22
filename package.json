@@ -1,0 +1,21 @@
+{
+  "name": "bubbly",
+  "version": "1.0.0",
+  "description": "バブルチャートで学習や投資などの情報を視覚的に整理・管理するWebアプリケーション",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server -p 3000 -o",
+    "start": "npx http-server -p 3000"
+  },
+  "keywords": [
+    "bubble-chart",
+    "visualization",
+    "learning",
+    "investment"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

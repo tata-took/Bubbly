@@ -17,12 +17,14 @@ Bubblyは、さまざまな情報（学習トピック、投資ポートフォ�
 
 ## インストール
 
-### 前提条件
+### 方法1: ブラウザで直接開く（最も簡単）
 
-- Node.js (バージョン 16以上推奨)
-- npm または yarn
+1. リポジトリをクローンまたはダウンロード
+2. `index.html` をダブルクリックしてブラウザで開く
 
-### セットアップ
+これだけで動作します！Node.jsのインストールは不要です。
+
+### 方法2: ローカルサーバーで起動（推奨）
 
 ```bash
 # リポジトリをクローン
@@ -34,6 +36,18 @@ npm install
 
 # 開発サーバーを起動
 npm run dev
+```
+
+ブラウザで `http://localhost:3000` にアクセスしてください。
+
+### 方法3: Pythonの簡易サーバーで起動
+
+```bash
+# Python 3の場合
+python -m http.server 3000
+
+# Python 2の場合
+python -m SimpleHTTPServer 3000
 ```
 
 ブラウザで `http://localhost:3000` にアクセスしてください。
@@ -88,29 +102,40 @@ npm run dev
 
 ## 開発
 
-### ビルド
+このアプリケーションはバニラJavaScriptで作成されているため、ビルドプロセスは不要です。
+
+### 開発サーバーの起動
 
 ```bash
-# 本番環境用にビルド
-npm run build
+# 開発サーバーを起動
+npm run dev
 
-# ビルドしたアプリを起動
+# または
 npm start
 ```
 
-### テスト
+### ファイル構成
 
-```bash
-# テストを実行
-npm test
+```
+Bubbly/
+├── index.html          # メインHTMLファイル
+├── css/
+│   └── style.css       # スタイルシート
+├── js/
+│   ├── app.js          # アプリケーションロジック
+│   └── bubbleChart.js  # バブルチャート描画
+├── package.json        # プロジェクト設定
+├── README.md           # プロジェクト説明
+└── USAGE_JA.md        # 詳細な使い方ガイド
 ```
 
 ## 技術スタック
 
-- フロントエンド: React / Vue.js / Next.js
-- データ可視化: D3.js / Chart.js
-- スタイリング: CSS / Tailwind CSS
-- データ保存: LocalStorage / Firebase / PostgreSQL
+- **フロントエンド**: Vanilla JavaScript (ES6+)
+- **データ可視化**: D3.js v7
+- **スタイリング**: CSS3 (カスタムプロパティ、ダークモード対応)
+- **データ保存**: LocalStorage (JSON形式)
+- **依存関係**: なし（D3.jsはCDNから読み込み）
 
 ## ライセンス
 
